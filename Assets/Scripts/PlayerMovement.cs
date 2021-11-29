@@ -23,6 +23,7 @@ public class PlayerMovement : MonoBehaviour
 
     void Start()
     {
+        dirX = 1;
         playerRigidbody = GetComponent<Rigidbody2D>();
         if(gm==null)
         {
@@ -30,11 +31,8 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
     void Update()
     {
-        //default kierunek
-        dirX = 1;
         isGrounded = Physics2D.OverlapCircle(groundDetector.position, 0.15f, groundLayer);
         if (Input.GetButtonDown("Jump") && gm.isGameOn() && isGrounded)
         {
@@ -52,5 +50,11 @@ public class PlayerMovement : MonoBehaviour
         {
             playerRigidbody.velocity = Vector2.zero;
         }
+    }
+
+    public void SwitchSides()
+    {
+        if(isGrounded)
+        dirX *= -1;
     }
 }
