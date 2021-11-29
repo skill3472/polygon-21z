@@ -6,8 +6,8 @@ public class GameManagerScript : MonoBehaviour
 {
 
 
-
-    static bool isOn;
+    [SerializeField]
+    private bool isOn;
     // Start is called before the first frame update
     void Start()
     {
@@ -18,7 +18,7 @@ public class GameManagerScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetKeyUp(KeyCode.Space))
+        if(Input.GetButtonDown("Cancel"))
         {
             ChangeGameState();
         }
@@ -27,12 +27,12 @@ public class GameManagerScript : MonoBehaviour
     }
 
 
-    public static bool isGameOn()
+    public bool isGameOn()
     {
         return isOn;
     }
 
-    public static void ChangeGameState()
+    public void ChangeGameState()
     {
         isOn = !isOn;
     }
