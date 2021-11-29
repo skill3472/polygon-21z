@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerMovement : MonoBehaviour
 {
     int dirX,dirY;
-    Vector3 movement;
+    Vector2 movement;
 
    [SerializeField]
     float playerSpeed;
@@ -27,9 +27,9 @@ public class PlayerMovement : MonoBehaviour
 
         //default kierunek
         dirX = 1;
-
+     
         
-        movement = new Vector3(dirX * playerSpeed, dirY * playerSpeed, 0);
+        movement = new Vector2(dirX * playerSpeed, playerRigidbody.velocity.y);
     }
     private void FixedUpdate()
     {
@@ -39,7 +39,7 @@ public class PlayerMovement : MonoBehaviour
         }
         else
         {
-            playerRigidbody.velocity = Vector3.zero;
+            playerRigidbody.velocity = Vector2.zero;
         }
     }
 }
