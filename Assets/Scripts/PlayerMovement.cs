@@ -14,7 +14,6 @@ public class PlayerMovement : MonoBehaviour
     private GameManagerScript gm;
     [SerializeField]
     private LayerMask groundLayer;
-    bool isGrounded;
     [SerializeField]
     private Transform groundDetector;
 
@@ -33,8 +32,7 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
-        isGrounded = Physics2D.OverlapCircle(groundDetector.position, 0.15f, groundLayer);
-        if (Input.GetButtonDown("Jump") && gm.isGameOn() && isGrounded)
+        if (Input.GetButtonDown("Jump") && gm.isGameOn() && CheckGround())
         {
             Debug.Log("Jump");
             playerRigidbody.AddForce(new Vector2(0, jumpForce));
@@ -54,7 +52,12 @@ public class PlayerMovement : MonoBehaviour
 
     public void SwitchSides()
     {
-        if(isGrounded)
+        if(CheckGround())
         dirX *= -1;
+    }
+
+    public bool CheckGround()
+    {
+        return Physics2D.OverlapCircle(groundDetector.position, 0.15f, groundLayer);
     }
 }
