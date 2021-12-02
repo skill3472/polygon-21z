@@ -2,13 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.IO;
-
+using System.Linq;
 public class MovementLogger : MonoBehaviour
 {
     [Header("In-game stuff")]
     private float timeRemaining;
     [SerializeField] private float timeStep;
     private int i;
+    [SerializeField]
+    private GameManagerScript gm;
     public List<float> movementLogY = new List<float>();
     public List<float> movementLogTime = new List<float>();
     private bool isLogging;
@@ -21,6 +23,10 @@ public class MovementLogger : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        if (gm == null)
+        {
+            GameObject.Find("GameManager");
+        }
         timeRemaining = timeStep;
         isLogging = false;
         endFileName = Application.dataPath + "/" + fileName + ".csv";
@@ -29,7 +35,7 @@ public class MovementLogger : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetButtonDown("Jump") && !isLogging)
+        if(Input.GetButtonDown("Jump") && !isLogging && gm.isGameOn() == true) // Dodano sprawdzanie czy gra jest aktywna
         {
             isLogging = true;
             timer = 0;
@@ -61,14 +67,27 @@ public class MovementLogger : MonoBehaviour
     private void SaveToFile()
     {
         TextWriter tw = new StreamWriter(endFileName, false);
-        tw.WriteLine("Time,Y");
+        tw.WriteLine("Time:Y");
         tw.Close();
+        DataNormalizing();
 
         tw = new StreamWriter(endFileName, true);
         for (int i = 0; i < movementLogY.Count; i++)
         {
-            tw.WriteLine(movementLogTime[i].ToString() + "," + movementLogY[i].ToString());
+            tw.WriteLine(movementLogTime[i].ToString() + ":" + movementLogY[i].ToString());     //Zmieni³em znak podzielenia na :
         }
         tw.Close();
+    }
+
+    private void DataNormalizing()      // Normalizuje funkcje by rysowa³a siê powy¿ej 0
+    {
+        float yMin = Mathf.Abs(movementLogY.AsQueryable().Min());
+        float tMin = Mathf.Abs(movementLogTime.AsQueryable().Min());
+
+        for (i=0; i < movementLogY.Count();i++)
+        {
+            movementLogY[i] += yMin;
+            movementLogTime[i] += tMin;
+        }
     }
 }
