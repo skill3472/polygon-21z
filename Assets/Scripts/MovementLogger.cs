@@ -35,8 +35,9 @@ public class MovementLogger : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetButtonDown("Jump") && !isLogging && gm.isGameOn() == true) // Dodano sprawdzanie czy gra jest aktywna
+        if(Input.GetKeyDown(KeyCode.R) && !isLogging && gm.isGameOn() == true) // Dodano sprawdzanie czy gra jest aktywna
         {
+            Debug.Log("REC");
             isLogging = true;
             timer = 0;
         }
@@ -62,6 +63,7 @@ public class MovementLogger : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D collision)
     {
         isLogging = false;
+        Debug.Log("STOP");
     }
 
     private void SaveToFile()
@@ -77,6 +79,7 @@ public class MovementLogger : MonoBehaviour
             tw.WriteLine(movementLogTime[i].ToString() + ":" + movementLogY[i].ToString());     //Zmieni³em znak podzielenia na :
         }
         tw.Close();
+        Debug.Log("SAVED TO FILE");
     }
 
     private void DataNormalizing()      // Normalizuje funkcje by rysowa³a siê powy¿ej 0
