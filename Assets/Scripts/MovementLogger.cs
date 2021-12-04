@@ -62,8 +62,11 @@ public class MovementLogger : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
-        isLogging = false;
-        Debug.Log("STOP");
+        if (isLogging)                                                  // Dodano sprawdzanie czy zbieranie danych jest uruchomione
+        {
+            isLogging = false;
+            Debug.Log("STOP");
+        }
     }
 
     private void SaveToFile()
