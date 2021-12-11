@@ -6,6 +6,6 @@ public class GridManager : MonoBehaviour
 {
     private void Start()
     {
-        Grid grid = new Grid(4, 2, 2f);
+        Grid grid = new Grid(4, 2, 2f); 
     }
 }
