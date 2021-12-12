@@ -4,10 +4,17 @@ using UnityEngine;
 
 public class GridManager : MonoBehaviour
 {
+    [SerializeField]
+    private Vector3 origin;
+    private Grid grid;
     private void Start()
     {
-        Vector3 origin = new Vector3(-10, -5, 0);
 
-        Grid grid = new Grid(100, 20, 0.3f,origin); 
+        grid = new Grid(100, 20, 0.3f,origin); 
+    }
+
+    private void Update()
+    {
+        
     }
 }
