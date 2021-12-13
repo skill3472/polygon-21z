@@ -28,18 +28,18 @@ public class Grid
             for(int y = 0; y < gridArray.GetLength(1); y++)
             {
                 // rysuje grida w scenie, docelowo grid ma siê wyœwietlaæ tylko tam gdzie jest kursor ( pojedyncza komórka grida, ¿eby gracz wiedzia³ gdzie stawia klocek)
-                debugTextArray[x,y] =  Utility.CreateWorldText(gridArray[x, y].ToString(), null, GetWorldPosition(x,y) + new Vector3(cellSize,cellSize) * 0.5f + originVector, 1, Color.white, TextAnchor.MiddleCenter);
+               // debugTextArray[x,y] =  Utility.CreateWorldText(gridArray[x, y].ToString(), null, GetWorldPosition(x,y) + new Vector3(cellSize,cellSize) * 0.5f + originVector, 1, Color.white, TextAnchor.MiddleCenter);
                 
-                Debug.DrawLine(GetWorldPosition(x , y) + originVector, GetWorldPosition(x, y + 1) + originVector, Color.white, 100f); //Rysuje ramki grida
-                Debug.DrawLine(GetWorldPosition(x, y) + originVector, GetWorldPosition(x + 1, y) + originVector, Color.white, 100f);
+                //Debug.DrawLine(GetWorldPosition(x , y) + originVector, GetWorldPosition(x, y + 1) + originVector, Color.white, 100f); //Rysuje ramki grida
+               // Debug.DrawLine(GetWorldPosition(x, y) + originVector, GetWorldPosition(x + 1, y) + originVector, Color.white, 100f);
 
             }
 
-            Debug.DrawLine(GetWorldPosition(0, height) + originVector, GetWorldPosition(width, height) + originVector, Color.white, 100f);  // Rysuje dolna i gorna kreske grida xd do poprawienia bo dla pojedynczych komorek nie bêdzie dzia³a³o w ten sposób chyba
-            Debug.DrawLine(GetWorldPosition(width, 0) + originVector, GetWorldPosition(width, height) + originVector, Color.white, 100f);
+           // Debug.DrawLine(GetWorldPosition(0, height) + originVector, GetWorldPosition(width, height) + originVector, Color.white, 100f);  // Rysuje dolna i gorna kreske grida xd do poprawienia bo dla pojedynczych komorek nie bêdzie dzia³a³o w ten sposób chyba
+           // Debug.DrawLine(GetWorldPosition(width, 0) + originVector, GetWorldPosition(width, height) + originVector, Color.white, 100f);
         }
 
-        SetValue(2, 1, 56);
+       //SetValue(2, 1, 56);
 
     }
 
