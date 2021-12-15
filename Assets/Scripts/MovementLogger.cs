@@ -35,7 +35,7 @@ public class MovementLogger : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.R) && !isLogging && gm.isGameOn() == true) // Dodano sprawdzanie czy gra jest aktywna
+        if(Input.GetKeyDown(KeyCode.L) && !isLogging && gm.isGameOn() == true) // Dodano sprawdzanie czy gra jest aktywna
         {
             Debug.Log("REC");
             isLogging = true;

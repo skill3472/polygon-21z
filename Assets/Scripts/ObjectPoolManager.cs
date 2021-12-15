@@ -13,7 +13,9 @@ public class ObjectPoolManager : MonoBehaviour
     private GameObject Platform;
     [SerializeField]
     private List<GameObject> objList = new List<GameObject>();
-    // Start is called before the first frame update
+
+    int b = 0;
+
     void Start()
     {
         for(int i = 0; i < objNumber; i++)
@@ -30,17 +32,37 @@ public class ObjectPoolManager : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0))
         {
-            PlacePlatform(Utility.GetMouseWorldPosition());
+            RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero);
+            if (hit.collider.gameObject.tag != "platform" || hit.collider.gameObject.tag != "spikes")
+            {
+                PlacePlatform(Utility.GetMouseWorldPosition());
+            }
         }
     }
 
 
     public void PlacePlatform(Vector3 _position)
     {
-        objList[0].transform.position = _position;
-        objList[0].SetActive(true);
+        _position = new Vector3(_position.x, _position.y, -1);
+        if (b >= objNumber)
+        {
+            b = 0;
+        }
+        objList[b].transform.position = _position;
+        objList[b].SetActive(true);
         Debug.Log("Pozdr");
-        objList.RemoveAt(0);
+        b += 1;
 
     }
+
+    public void ScreenPlatformClean()
+    {
+        for (int i = 0; i < objNumber; i++)
+        {
+
+            objList[i].SetActive(false);
+        }
+        b = 0;
+    }
+
 }

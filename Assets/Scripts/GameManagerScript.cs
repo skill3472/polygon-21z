@@ -8,6 +8,7 @@ public class GameManagerScript : MonoBehaviour
 
     [SerializeField]
     private bool isOn;
+    public bool isAlive = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -18,12 +19,16 @@ public class GameManagerScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetButtonDown("Cancel"))
+        if(isAlive == false)
         {
-            ChangeGameState();
-        }
 
-        
+            if (Input.GetButtonDown("Cancel"))
+            {
+                ChangeGameState();
+                isAlive = true;
+            }
+
+        }
     }
 
 
@@ -35,6 +40,7 @@ public class GameManagerScript : MonoBehaviour
     public void ChangeGameState()
     {
         isOn = !isOn;
+        
     }
 
 
