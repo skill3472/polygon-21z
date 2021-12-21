@@ -59,7 +59,7 @@ public class PlayerMovement : MonoBehaviour
                 gm.ChangeGameState();
                 playerTransform.position = startingPoint1.transform.position;
                 objPool.ScreenPlatformClean();
-                gm.isAlive = false;
+                
             }
             if (lvl == 2)
             {
@@ -67,7 +67,7 @@ public class PlayerMovement : MonoBehaviour
                 gm.ChangeGameState();
                 playerTransform.position = startingPoint2.transform.position;
                 objPool.ScreenPlatformClean();
-                gm.isAlive = false;
+                
             }
         }
         if(gm.isGameOn())
@@ -102,7 +102,7 @@ public class PlayerMovement : MonoBehaviour
 
     public void SwitchSides()
     {
-        if (CheckGround()&&canSwitch)
+        if (canSwitch)
         {
             dirX *= -1;
             playerTransform.localScale = new Vector3(playerTransform.localScale.x * -1, playerTransform.localScale.y, playerTransform.localScale.z);
@@ -113,7 +113,7 @@ public class PlayerMovement : MonoBehaviour
 
     public bool CheckGround()
     {
-        return Physics2D.OverlapCircle(groundDetector.position, 0.2f, groundLayer);
+        return Physics2D.OverlapCircle(groundDetector.position, 0.25f, groundLayer);
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -122,18 +122,21 @@ public class PlayerMovement : MonoBehaviour
         {
             if(lvl == 1)
             {
-                gm.ChangeGameState();
+                playerRigidbody.velocity = Vector2.zero;
                 playerTransform.position = startingPoint1.transform.position;
+                gm.TurnOff();
+                
                 objPool.ScreenPlatformClean();
-                gm.isAlive = false;
+                
             }
             if(lvl == 2)
             {
-                
-                gm.ChangeGameState();
+                playerRigidbody.velocity = Vector2.zero;
                 playerTransform.position = startingPoint2.transform.position;
+                gm.TurnOff();
+
                 objPool.ScreenPlatformClean();
-                gm.isAlive = false;
+                
             }
         }
         if (other.gameObject.tag == "finish")
