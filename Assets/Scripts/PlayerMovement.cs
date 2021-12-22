@@ -56,7 +56,7 @@ public class PlayerMovement : MonoBehaviour
         {
             if (lvl == 1)
             {
-                gm.ChangeGameState();
+                gm.TurnOff();
                 playerTransform.position = startingPoint1.transform.position;
                 objPool.ScreenPlatformClean();
                 
@@ -64,7 +64,7 @@ public class PlayerMovement : MonoBehaviour
             if (lvl == 2)
             {
 
-                gm.ChangeGameState();
+                gm.TurnOff();
                 playerTransform.position = startingPoint2.transform.position;
                 objPool.ScreenPlatformClean();
                 
@@ -113,7 +113,7 @@ public class PlayerMovement : MonoBehaviour
 
     public bool CheckGround()
     {
-        return Physics2D.OverlapCircle(groundDetector.position, 0.25f, groundLayer);
+        return Physics2D.OverlapCircle(groundDetector.position, 0.4f, groundLayer);
     }
 
     private void OnTriggerEnter2D(Collider2D other)
