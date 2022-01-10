@@ -17,7 +17,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField]
     Camera cam;
 
-   [SerializeField]
+    [SerializeField]
     private float playerSpeed;
     [SerializeField]
     private float jumpForce;
@@ -37,7 +37,7 @@ public class PlayerMovement : MonoBehaviour
     public bool canSwitch = true;
     Rigidbody2D playerRigidbody;
     private int lvl = 1;
-    
+
 
     void Start()
     {
@@ -59,21 +59,18 @@ public class PlayerMovement : MonoBehaviour
                 gm.TurnOff();
                 playerTransform.position = startingPoint1.transform.position;
                 objPool.ScreenPlatformClean();
-                
+
             }
             if (lvl == 2)
             {
-
                 gm.TurnOff();
                 playerTransform.position = startingPoint2.transform.position;
                 objPool.ScreenPlatformClean();
-                
             }
         }
         if(gm.isGameOn())
         {
             anim.SetBool("isOn", true);
-
         }
         else if (gm.isGameOn() == false)
         {
@@ -93,14 +90,13 @@ public class PlayerMovement : MonoBehaviour
             playerRigidbody.AddForce(new Vector2(0, jumpForce));
             anim.SetTrigger("Jump");
         }
-        
+
     }
     private void FixedUpdate()
     {
         if (gm.isGameOn() == true && CheckGround())
         {
             playerRigidbody.velocity = new Vector2(dirX * playerSpeed, playerRigidbody.velocity.y);
-            
         }
         else if(gm.isGameOn() == false)
         {
@@ -133,9 +129,8 @@ public class PlayerMovement : MonoBehaviour
                 playerRigidbody.velocity = Vector2.zero;
                 playerTransform.position = startingPoint1.transform.position;
                 gm.TurnOff();
-                
+
                 objPool.ScreenPlatformClean();
-                
             }
             if(lvl == 2)
             {
@@ -144,7 +139,6 @@ public class PlayerMovement : MonoBehaviour
                 gm.TurnOff();
 
                 objPool.ScreenPlatformClean();
-                
             }
         }
         if (other.gameObject.tag == "finish")
@@ -155,7 +149,6 @@ public class PlayerMovement : MonoBehaviour
             gm.isAlive = false;
             cam.transform.position = new Vector3(21.32f, 3.63f, cam.transform.position.z);
             lvl += 1;
-            
         }
 
     }
