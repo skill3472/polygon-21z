@@ -81,11 +81,19 @@ public class PlayerMovement : MonoBehaviour
             dirX = 1;
             playerTransform.localScale = new Vector3(2.5f, 2.5f, 2.5f);
         }
+        if (CheckGround())
+        {
+            anim.SetBool("Grounded", true);
+            //Debug.Log(CheckGround());
+        }
         if (Input.GetButtonDown("Jump") && gm.isGameOn() && CheckGround())
         {
             Debug.Log("Jump");
+            anim.SetBool("Grounded", false);
             playerRigidbody.AddForce(new Vector2(0, jumpForce));
+            anim.SetTrigger("Jump");
         }
+        
     }
     private void FixedUpdate()
     {
@@ -113,7 +121,7 @@ public class PlayerMovement : MonoBehaviour
 
     public bool CheckGround()
     {
-        return Physics2D.OverlapCircle(groundDetector.position, 0.4f, groundLayer);
+        return Physics2D.OverlapCircle(groundDetector.position, 0.3f, groundLayer);
     }
 
     private void OnTriggerEnter2D(Collider2D other)
