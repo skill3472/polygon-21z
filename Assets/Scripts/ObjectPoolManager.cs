@@ -13,6 +13,8 @@ public class ObjectPoolManager : MonoBehaviour
     private GameObject Platform;
     [SerializeField]
     private List<GameObject> objList = new List<GameObject>();
+    [SerializeField]
+    GameManagerScript gm;
 
     int b = 0;
 
@@ -32,10 +34,14 @@ public class ObjectPoolManager : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(0))
         {
-            RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero);
-            if (hit.collider.gameObject.tag != "platform" || hit.collider.gameObject.tag != "spikes")
+            if (gm.isGameOn())
             {
-                PlacePlatform(Utility.GetMouseWorldPosition());
+                Collider2D hit = Physics2D.OverlapPoint(Camera.main.ScreenToWorldPoint(Input.mousePosition));
+                Debug.Log(hit);
+                if (hit == null)
+                {
+                    PlacePlatform(Utility.GetMouseWorldPosition());
+                }
             }
         }
     }

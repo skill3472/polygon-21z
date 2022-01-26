@@ -19,13 +19,13 @@ public class GameManagerScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(isAlive == false)
+        if(isGameOn() == false)
         {
 
             if (Input.GetButtonDown("Cancel"))
             {
                 ChangeGameState();
-                isAlive = true;
+                
             }
 
         }
@@ -41,6 +41,11 @@ public class GameManagerScript : MonoBehaviour
     {
         isOn = !isOn;
         
+    }
+
+    public void TurnOff()
+    {
+        isOn = false;
     }
 
 
